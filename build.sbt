@@ -1,6 +1,6 @@
 organization in ThisBuild := "com.thoughtworks.dsl"
 
-name := "dsl-domains-akka-http"
+name := "domains-akka-http"
 
 libraryDependencies += "com.thoughtworks.dsl" %% "dsl" % "1.1.1"
 
