@@ -4,6 +4,15 @@ import Dsl.!!
 import akka.http.scaladsl.server._
 import akka.http.scaladsl.server.util.Tuple
 
+/** This mimicked package object [[http]] that contains [[https://github.com/akka/akka-http Akka HTTP]] support for [[https://github.com/ThoughtWorksInc/Dsl.scala Dsl.scala]].
+  *
+  * @note This [[http]] object can be found in the following library:
+  *
+  *       <pre>
+  *       libraryDependencies += "com.thoughtworks.dsl" %% "domains-akka-http" % "latest.release"
+  *       </pre>
+  *
+  */
 object http {
 
   implicit def directiveDsl[Keyword, Value, T: Tuple](
