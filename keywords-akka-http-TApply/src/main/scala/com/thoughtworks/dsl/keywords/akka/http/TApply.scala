@@ -17,7 +17,7 @@ case class TApply[L](directive: Directive[L]) extends AnyVal with Dsl.Keyword[TA
 
 object TApply {
 
-  implicit def implicitlyTApply[L](directive: Directive[L]): TApply[L] = TApply(directive)
+  implicit def implicitTApply[L](directive: Directive[L]): TApply[L] = TApply(directive)
 
   implicit def tApplyDsl[L]: Dsl[TApply[L], Route, L] = new Dsl[TApply[L], Route, L] {
     def cpsApply(keyword: TApply[L], handler: L => Route): Route = {
