@@ -1,8 +1,8 @@
 organization in ThisBuild := "com.thoughtworks.dsl"
 
-val `domains-akka-http` = project
+lazy val `domains-akka-http` = project.dependsOn(`keywords-akka-http-TApply` % Test)
 
-val `keywords-akka-http-TApply` = project
+lazy val `keywords-akka-http-TApply` = project
 
 enablePlugins(ScalaUnidocPlugin)
 
