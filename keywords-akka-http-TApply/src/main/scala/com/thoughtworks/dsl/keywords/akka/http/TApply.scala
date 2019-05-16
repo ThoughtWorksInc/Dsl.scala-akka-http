@@ -12,7 +12,7 @@ import scala.language.implicitConversions
   *       libraryDependencies += "com.thoughtworks.dsl" %% "keywords-akka-http-tapply" % "latest.release"
   *       </pre>
   *
-  * @example Ordinary Akka HTTP DSL requires additional brackets to perform any directive.
+  * @example Ordinary Akka HTTP DSL requires additional brackets to perform directives.
   *
   *          For example, the following `extractParametersWithBrackets` extracts query parameters `p1` and `p2` with the help of the directive [[akka.http.scaladsl.server.Directives.parameters]].
   *
@@ -31,7 +31,10 @@ import scala.language.implicitConversions
   *          }
   *          }}}
   *
-  *          The brackets can be avoided with the help of this [[TApply]] keyword:
+  *          When you have lots of directives, you will experience the callback hell problem,
+  *          as the directives become heavily nested scopes and the code become too complicated to read.
+  *
+  *          Those brackets can be avoided with the help of this [[TApply]] keyword:
   *
   *          {{{
   *          def extractParametersWithoutBrackets = {
