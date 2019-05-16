@@ -74,7 +74,7 @@ object http {
     }
 
     @inline
-    private def continuationToDirective1(continuation: Route !! T): Directive[Tuple1[T]] = {
+    private def continuationToDirective1(continuation: Route !! T): Directive1[T] = {
       Directive[Tuple1[T]] { (tupledHandler: Tuple1[T] => Route) =>
         continuation { a: T =>
           tupledHandler(Tuple1(a))
