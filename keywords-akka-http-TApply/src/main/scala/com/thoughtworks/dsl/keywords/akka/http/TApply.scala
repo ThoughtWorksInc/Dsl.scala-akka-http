@@ -16,6 +16,7 @@ import scala.language.implicitConversions
   *          For example, the following `extractParametersWithBrackets` extracts query parameters `p1` and `p2` with the help of the directive [[akka.http.scaladsl.server.Directives.parameters]].
   *
   *          {{{
+  *          import akka.http.scaladsl.server.Directives._
   *          def extractParametersWithBrackets = {
   *            get {
   *              parameters("p1", "p2") { (p1, p2) =>
@@ -49,6 +50,7 @@ import scala.language.implicitConversions
   *          For example, you can use [[com.thoughtworks.dsl.keywords.Using]] to automatically manage resources.
   *
   *          {{{
+  *          import akka.http.scaladsl.server.Directives._
   *          import com.thoughtworks.dsl.keywords.Using
   *          import com.thoughtworks.dsl.keywords.akka.http.TApply
   *          import java.nio.file.Files.newDirectoryStream
@@ -57,7 +59,7 @@ import scala.language.implicitConversions
   *
   *          def currentDirectoryRoute = pathPrefix("current-directory") {
   *            get {
-  *              val Tuple1(glob) = !TApply(parameters("glob"))
+  *              val glob = !TApply(parameters("glob"))
   *              val currentDirectory = !Using(newDirectoryStream(Paths.get(""), glob))
   *              path("file-names") {
   *                complete(currentDirectory.iterator.asScala.map(_.toString).mkString(","))
@@ -82,15 +84,47 @@ import scala.language.implicitConversions
   *          }
   *          }}}
   */
-case class TApply[L](directive: Directive[L]) extends AnyVal with Dsl.Keyword[TApply[L], L]
+sealed trait TApply[L] extends Any {
+  def directive: Directive[L]
+}
 
-object TApply {
+private[http] trait LowPriorityTApply {
+  import TApply._
 
-  implicit def implicitTApply[L](directive: Directive[L]): TApply[L] = TApply(directive)
+  @inline
+  implicit def implicitTApplyN[L](directive: Directive[L]): TApplyN[L] = TApplyN(directive)
 
-  implicit def tApplyDsl[L]: Dsl[TApply[L], Route, L] = new Dsl[TApply[L], Route, L] {
+  @inline
+  implicit def tApplyNDsl[L]: Dsl[TApply[L], Route, L] = new Dsl[TApply[L], Route, L] {
     def cpsApply(keyword: TApply[L], handler: L => Route): Route = {
       keyword.directive.tapply(handler)
+    }
+  }
+
+}
+
+object TApply extends LowPriorityTApply {
+
+  case class TApplyN[L](directive: Directive[L]) extends AnyVal with Dsl.Keyword[TApplyN[L], L] with TApply[L]
+
+  case class TApply1[T](directive: Directive1[T]) extends AnyVal with Dsl.Keyword[TApply1[T], T] with TApply[Tuple1[T]]
+
+  @inline
+  def apply[L](directive: Directive[L])(
+      implicit dummyImplicit: DummyImplicit = DummyImplicit.dummyImplicit): TApplyN[L] = TApplyN(directive)
+
+  @inline
+  def apply[T](directive: Directive1[T]): TApply1[T] = TApply1(directive)
+
+  @inline
+  implicit def implicitTApply1[T](directive: Directive1[T]): TApply1[T] = TApply1(directive)
+
+  @inline
+  implicit def tApply1Dsl[T]: Dsl[TApply[Tuple1[T]], Route, T] = new Dsl[TApply[Tuple1[T]], Route, T] {
+    def cpsApply(keyword: TApply[Tuple1[T]], handler: T => Route): Route = {
+      keyword.directive.tapply {
+        case Tuple1(a) => handler(a)
+      }
     }
   }
 

@@ -12,12 +12,11 @@ libraryDependencies += "com.typesafe.akka" %% "akka-http-testkit" % "10.1.8" % T
 
 libraryDependencies += "com.thoughtworks.dsl" %% "keywords-using" % "1.2.0" % Optional
 
-addCompilerPlugin("com.thoughtworks.dsl" %% "compilerplugins-bangnotation" % "1.1.1")
+addCompilerPlugin("com.thoughtworks.dsl" %% "compilerplugins-bangnotation" % "1.2.0")
 
-addCompilerPlugin("com.thoughtworks.dsl" %% "compilerplugins-reseteverywhere" % "1.1.1")
+addCompilerPlugin("com.thoughtworks.dsl" %% "compilerplugins-reseteverywhere" % "1.2.0")
 
 import meta._
 
 exampleSuperTypes += ctor"_root_.akka.http.scaladsl.testkit.ScalatestRouteTest"
 
-exampleSuperTypes += ctor"_root_.akka.http.scaladsl.server.Directives"
