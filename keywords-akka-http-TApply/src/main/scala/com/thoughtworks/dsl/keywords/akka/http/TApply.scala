@@ -5,6 +5,7 @@ import scala.language.implicitConversions
 
 /** This [[TApply]] keyword can be used to extract the value of [[akka.http.scaladsl.server.Directive]]s, without additional indentation levels of curly brackets.
   *
+  * @see [[com.thoughtworks.dsl.domains.akka.http]] for creating custom Akka HTTP directives with the help of Dsl.scala.
   * @note This [[TApply]] class can be found in the following library:
   *
   *       <pre>
