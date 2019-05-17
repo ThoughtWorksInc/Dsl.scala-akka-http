@@ -18,7 +18,7 @@ import akka.http.scaladsl.server.util.Tuple
   *          import com.thoughtworks.dsl.domains.akka.http._
   *          }}}
   *
-  *          Suppose you are creating a directive to asynchronously save the request body to a temporary file and return the file name.
+  *          Suppose you are creating a directive to asynchronously save the request body to a temporary file and return the file path.
   *
   *          {{{
   *          import java.nio.file.Path
