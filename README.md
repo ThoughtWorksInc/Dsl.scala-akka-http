@@ -8,5 +8,5 @@
 
 There are two libraries in this project:
 
-* [keywords.akka.http.TApply](https://javadoc.io/page/com.thoughtworks.dsl/keywords-akka-http-tapply_2.12/latest/com/thoughtworks/dsl/keywords/akka/http/TApply.html) provides the direct style DSL to extract values from Akka HTTP directives.
-* [domains.akka.http](https://javadoc.io/page/com.thoughtworks.dsl/domains-akka-http_2.12/latest/com/thoughtworks/dsl/domains/akka/http%24.html) enables any Dsl.scala keywords for creating custom Akka HTTP directives.
+* [keywords-akka-http-tapply](https://javadoc.io/page/com.thoughtworks.dsl/keywords-akka-http-tapply_2.12/latest/com/thoughtworks/dsl/keywords/akka/http/TApply.html) provides the direct style DSL to extract values from Akka HTTP directives.
+* [domains-akka-http](https://javadoc.io/page/com.thoughtworks.dsl/domains-akka-http_2.12/latest/com/thoughtworks/dsl/domains/akka/http%24.html) enables any Dsl.scala keywords for creating custom Akka HTTP directives.
