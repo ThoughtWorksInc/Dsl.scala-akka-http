@@ -6,4 +6,4 @@ lazy val `keywords-akka-http-TApply` = project
 
 enablePlugins(ScalaUnidocPlugin)
 
-publish / skip := false
+publish / skip := true
